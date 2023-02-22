@@ -4,6 +4,7 @@ import java.util.Calendar;
 
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class SpeakingClockService {
 	
@@ -13,11 +14,20 @@ public class SpeakingClockService {
 	
 	private String tens[] = {"", "ten","twenty", "thirty","fourty","fifty","sixty"};
 
-	public String getCurrentTime() {
+	public String getCurrentTime(String time){
+		if(time == null || time.isEmpty()) {
+			return "Please enter Time";
+		}
+		String[] timeArr = time.split(":");
 		StringBuffer timeInWords = new StringBuffer();
-		Calendar calendar = Calendar.getInstance();
-		int hour = calendar.get(Calendar.HOUR_OF_DAY);
-		int minute = calendar.get(Calendar.MINUTE);
+		//Calendar calendar = Calendar.getInstance();
+		/*
+		 * int hour = calendar.get(Calendar.HOUR_OF_DAY); int minute =
+		 * calendar.get(Calendar.MINUTE);
+		 */
+		
+		int hour = Integer.parseInt(timeArr[0]);
+		int minute = Integer.parseInt(timeArr[1]);
 		timeInWords.append("It's ").append(getHoursInWords(hour)).append(getMinutesInWords(minute));
 		return timeInWords.toString();
 	}
